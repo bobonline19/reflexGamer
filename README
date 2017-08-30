@@ -1,0 +1,17 @@
+Compilation:
+	*install the Arduino IDE open the file and upload to an Arduino using the USB
+         cable
+Assumptions / information:
+	*see authors blog post for the circuit
+	*assumes: 
+		the LEDs are controlled by pins D2, D3, D4, D5, D6
+		the LCD is controlled by pins D7, D8, D9, D10, D11, D12
+		the piezo is controlled by pin D13
+		the switches use a potential divider circuit sampled by pin A0
+		A5 is used to generate random numbers
+	*power supply is 6V to the Arduino, the LEDs are high wattage, so require a
+	constant current source circuit (described in the post). 
+Contributing development:
+        * at the moment the code is under private repo with no development branches. 
+	  Contact the code owner to contribute ideas. 
+	
