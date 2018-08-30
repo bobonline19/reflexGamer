@@ -114,7 +114,8 @@ void loop() {
           button[i]=0;
         }
       }
-    } else if(keyVal >= 100 && keyVal <= 520 ) { // 10 k ohm
+    //} else if(keyVal >= 100 && keyVal <= 520 ) { // 10 k ohm
+    } else if(keyVal >= 250 && keyVal <= 520 ) { // 10 k ohm
       for (i=0;i<N;i++) {
         if(i==3) {
           button[i]=1;
@@ -122,7 +123,8 @@ void loop() {
           button[i]=0;
         }
       }
-    } else if(keyVal >= 3 && keyVal <= 20 ) { // 1 M ohm
+    //} else if(keyVal >= 3 && keyVal <= 20 ) { // 1 M ohm
+    } else if(keyVal >= 50 && keyVal <= 200 ) { // 1 M ohm
       for (i=0;i<N;i++) {
         if(i==4) {
           button[i]=1;
@@ -190,4 +192,4 @@ void loop() {
         }
   }
   
-}
+}    
