@@ -71,7 +71,8 @@ void loop() {
     
     delay(10);
 
-    if(keyVal > 0) {
+    //if(keyVal > 0) {
+    if(keyVal > 5) {
       state=1;
     } else {
       state=0;
@@ -89,7 +90,7 @@ void loop() {
     for (i=0;i<N;i++) button[i]=0;
   
     // STORE WHICH BUTTON HAS BEEN PRESSED ///////////////////////////////////////////
-    Serial.println(keyVal);
+    //Serial.println(keyVal);
     if(keyVal >= 1010 ) { // no resistor
        for (i=0;i<N;i++) {
         if(i==0) {
@@ -106,7 +107,7 @@ void loop() {
           button[i]=0;
         }
       }
-    } else if(keyVal >= 540 && keyVal <= 700 ) { // 4.7 k ohm
+    } else if(keyVal >= 540 && keyVal <= 750 ) { // 4.7 k ohm
       for (i=0;i<N;i++) {
         if(i==2) {
           button[i]=1;
@@ -137,20 +138,30 @@ void loop() {
   
     // CHECK TO SEE IF BUTTON PRESSED IS SAME AS LIGHT ON ////////////////////////////
     for (i=0;i<N;i++) {
-      if((button[i]==light_on[i]) & button[i] > 0) {
+      if (button[i] > 0)
+      {
+      if((button[i]==light_on[i]) /*& button[i] > 0*/) {
         success=1;
         break;
+      }
+      else
+      {
+        success = 2; // wrong button pressed
+      }
       } 
     }  
     //////////////////////////////////////////////////////////////////////////////////
 
-    if (changestate & success==0) {
+    if (changestate & success==2) {
+      success = 0;
       countbad++;
       changestate=0;
+      Serial.println("Bad"); //DEBUG
+      Serial.println(keyVal);
     }
   
     // TURN A LIGHT ON ///////////////////////////////////////////////////////////////
-    if (success ) {
+    if (success == 1) {
       while (reply == replyold) {
         reply = random(N);
       }
@@ -169,6 +180,9 @@ void loop() {
         }
       }
       success=0;
+
+      Serial.println("Good"); //DEBUG
+      Serial.println(keyVal);
     }
     //////////////////////////////////////////////////////////////////////////////////
     
@@ -190,6 +204,12 @@ void loop() {
         for (i=0;i<N;i++) {
           digitalWrite(lights[i],LOW);
         }
+
+        // beep when we finish
+        for (i=0;i<N;i++) {
+          tone(13, notes[i]); // play a tone
+          delay(200);
+        }
+        noTone(13);
   }
-  
 }    
